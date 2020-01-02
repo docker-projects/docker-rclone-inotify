@@ -7,7 +7,7 @@ else
   exit 1
 fi
 
-if [ -n "$BACKEND" ] && [ -n "BACKEND_PATH" ]; then
+if [ -n "$BACKEND" ] && [ -n "$BACKEND_PATH" ]; then
   echo "$BACKEND" > /var/run/s6/container_environment/BACKEND
   echo "$BACKEND_PATH" > /var/run/s6/container_environment/BACKEND_PATH
 else
@@ -26,7 +26,7 @@ else
   echo "/config/rclone.conf" > /var/run/s6/container_environment/RCLONE_CONFIG
 fi
 
-if ! s6-setuidgid abc rclone touch $BACKEND:$BACKEND_PATH; then
+if ! s6-setuidgid abc rclone touch "$BACKEND":"$BACKEND_PATH"; then
   exit 1
 fi
 
