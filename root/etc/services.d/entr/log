@@ -1,3 +1,6 @@
 #!/usr/bin/with-contenv sh
 
+echo $SRC > /tmp/t1
+echo $DST > /tmp/t2
+
 rclone sync $SRC $DST
