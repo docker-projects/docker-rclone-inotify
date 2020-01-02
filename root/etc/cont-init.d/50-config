@@ -1,6 +1,6 @@
 #!/usr/bin/with-contenv sh
 
-if [ -n "$SOURCE" ] [ -d "$SOURCE" ]; then
+if [ -n "$SOURCE" ] && [ -d "$SOURCE" ]; then
   echo "$SOURCE" > /var/run/s6/container_environment/SOURCE
 else
   echo "SOURCE is not set or does not exists."
