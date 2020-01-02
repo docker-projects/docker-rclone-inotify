@@ -1,6 +1,6 @@
 #!/usr/bin/with-contenv sh
 
-cat /var/run/s6/container_environment/FOLDER
+cat /var/run/s6/container_environment/FOLDER | wc -l
 
 echo "Tad"
 echo $FOLDER
