@@ -26,6 +26,8 @@ else
   echo "/config/rclone.conf" > /var/run/s6/container_environment/RCLONE_CONFIG
 fi
 
+s6-envdir /var/run/s6/container_environment/
+
 if ! s6-setuidgid abc rclone touch "$BACKEND":"$BACKEND_PATH"; then
   exit 1
 fi
