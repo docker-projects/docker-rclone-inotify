@@ -1,12 +1,11 @@
 #!/usr/bin/with-contenv sh
 
-cat /var/run/s6/container_environment/FOLDER | wc -l
-
-echo "Tad"
-echo $FOLDER
-echo "$FOLDER"
-echo "${FOLDER}"
-echo ${FOLDER}
+#cat /var/run/s6/container_environment/FOLDER | wc -l
+#echo "Tad"
+#echo $FOLDER
+#echo "$FOLDER"
+#echo "${FOLDER}"
+#echo ${FOLDER}
 
 #s6-setuidgid abc while true; do find "$FOLDER" | entr -n -d rclone sync; done
-#s6-setuidgid abc inotifywait -m -r -e close_write -e delete -e move -q $FOLDER | while read events; do rclone sync $TODO ; done
+s6-setuidgid abc inotifywait -m -r -e close_write -e delete -e move -q $FOLDER | while read events; do rclone sync $TODO ; done
