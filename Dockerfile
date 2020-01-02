@@ -19,4 +19,6 @@ RUN set -xe && \
     apk del curl unzip && \
     rm -rf /tmp/*
 
+COPY root/ /
+
 ENTRYPOINT [ "/init" ]
