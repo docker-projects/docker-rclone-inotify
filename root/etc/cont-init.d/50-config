@@ -1,6 +1,6 @@
 #!/usr/bin/with-contenv sh
 
-if [ -n "$FOLDER" ] && [ -d "$FOLDER" ]; 
+if [ -n "$FOLDER" ] && [ -d "$FOLDER" ]; then
   echo "$FODLER" > /var/run/s6/container_environment/FOLDER
 else
   echo "FOLDER is not set, or does not exists"
