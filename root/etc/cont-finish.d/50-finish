@@ -1,4 +1,3 @@
 #!/usr/bin/with-contenv sh
 
-s6-svc -dwD /var/run/s6/services/entr
 s6-svc -dwD /var/run/s6/services/entr/log
