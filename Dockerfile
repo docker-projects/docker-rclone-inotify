@@ -12,7 +12,7 @@ ENV S6_BEHAVIOUR_IF_STAGE2_FAILS 2
 
 RUN set -xe && \
     addgroup -S ${GROUP} -g ${GID} && adduser -D -S -u ${UID} ${USER} ${GROUP} && \
-    apk add -U entr tzdata curl unzip && \
+    apk add -U entr inotify-tools tzdata curl unzip && \
     curl -sSL https://github.com/just-containers/s6-overlay/releases/download/v${S6_VER}/s6-overlay-amd64.tar.gz -o /tmp/s6-overlay-amd64.tar.gz && \
     tar xzf /tmp/s6-overlay-amd64.tar.gz -C / && \
     curl -sSL https://github.com/rclone/rclone/releases/download/v${RCLONE_VER}/rclone-v${RCLONE_VER}-linux-amd64.zip -o /tmp/rclone-linux-amd64.zip && \
