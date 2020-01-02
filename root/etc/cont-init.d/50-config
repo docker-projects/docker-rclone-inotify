@@ -1,16 +1,34 @@
 #!/usr/bin/with-contenv sh
 
-mkdir -p /src/
-mkdir -p /dst/
+if [ -n "$SOURCE" ] [ -d "$SOURCE" ]; then
+  echo "$SOURCE" > /var/run/s6/container_environment/SOURCE
+else
+  echo "SOURCE is not set or does not exists."
+  exit 1
+fi
 
-echo "/src/" > /var/run/s6/container_environment/SRC
-echo "/dst/" > /var/run/s6/container_environment/DST
+if [ -n "$BACKEND" ] && [ -n "BACKEND_PATH" ]; then
+  echo "$BACKEND" > /var/run/s6/container_environment/BACKEND
+  echo "$BACKEND_PATH" > /var/run/s6/container_environment/BACKEND_PATH
+else
+  echo "BACKEND and BACKEND_PATH must be set."
+  exit 1
+fi
 
-#if [ -n "$FOLDER" ] && [ -d "$FOLDER" ]; then
-#  echo "$FOLDER" > /var/run/s6/container_environment/FOLDER
-#else
-#  echo "FOLDER is not set, or does not exists"
-#  exit 1
-#fi
+if [ -n "$RCLONE_CONFIG" ]; then
+  if ! [ -f "$RCLONE_CONFIG" ]; then
+     echo "RCLONE_CONFIG does not exist"
+     exit 1
+  else
+     echo "$RCLONE_CONFIG" > /var/run/s6/container_environment/RCLONE_CONFIG
+  fi
+else
+  echo "/config/rclone.conf" > /var/run/s6/container_environment/RCLONE_CONFIG
+fi
 
+if ! s6-setuidgid abc rclone touch $BACKEND:$BACKEND_PATH; then
+  exit 1
+fi
 
+mkdir -p /config
+chown -R abc /config
