@@ -1,14 +1,16 @@
 #!/usr/bin/with-contenv sh
 
-if [ -n "$FOLDER" ] && [ -d "$FOLDER" ]; then
-  echo "$FOLDER" > /var/run/s6/container_environment/FOLDER
-else
-  echo "FOLDER is not set, or does not exists"
-  exit 1
-fi
-
 mkdir -p /src/
 mkdir -p /dst/
 
 echo "/src/" > /var/run/s6/container_environment/SRC
 echo "/dst/" > /var/run/s6/container_environment/DST
+
+#if [ -n "$FOLDER" ] && [ -d "$FOLDER" ]; then
+#  echo "$FOLDER" > /var/run/s6/container_environment/FOLDER
+#else
+#  echo "FOLDER is not set, or does not exists"
+#  exit 1
+#fi
+
+
