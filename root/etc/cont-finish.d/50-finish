@@ -1,4 +1,4 @@
 #!/usr/bin/with-contenv sh
 
-s6-svc -dwD /etc/services.d/entr/
-s6-svc -dwD /etc/services.d/entr/log/
+s6-svc -dwD /etc/services.d/entr
+s6-svc -dwD /etc/services.d/entr/log
