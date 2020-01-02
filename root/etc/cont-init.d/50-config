@@ -7,4 +7,8 @@ else
   exit 1
 fi
 
-cat /var/run/s6/container_environment/FOLDER
+mkdir -p /src/
+mkdir -p /dst/
+
+echo "/src/" > /var/run/s6/container_environment/SRC
+echo "/dst/" > /var/run/s6/container_environment/DST
