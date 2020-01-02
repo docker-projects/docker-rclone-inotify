@@ -8,6 +8,8 @@ ENV GROUP abc
 ENV GID 911
 ENV UID 911
 
+ENV S6_BEHAVIOUR_IF_STAGE2_FAILS 2
+
 RUN set -xe && \
     addgroup -S ${GROUP} -g ${GID} && adduser -D -S -u ${UID} ${USER} ${GROUP} && \
     apk add -U entr tzdata curl unzip && \
