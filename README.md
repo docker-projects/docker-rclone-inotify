@@ -15,3 +15,8 @@ docker run -d \
 -e "RCLONE_CONFIG_MYMEGA_PASS=xxxx" \
 lukasmrtvy/docker-rclone-inotify
 ```
+
+# optional 
+- PUID=1000
+- PGID=1000
+- TZ=Europe/Prague
