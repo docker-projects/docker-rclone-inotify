@@ -33,6 +33,6 @@ chown -R abc /config
 
 s6-setuidgid abc touch "$rc"
 
-if ! s6-setuidgid abc rclone --config "$rc" touch -C "$dest"; then
+if ! s6-setuidgid abc rclone --config "$rc" -vvvv touch -C "$dest"; then
   exit 1
 fi
