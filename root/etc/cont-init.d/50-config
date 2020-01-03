@@ -33,6 +33,6 @@ chown -R abc /config
 
 s6-setuidgid abc touch "$rc"
 
-if ! s6-setuidgid abc rclone --config "$rc" touch "$BACKEND":"$BACKEND_PATH"; then
+if ! s6-setuidgid abc rclone --config "$rc" touch -C "$BACKEND":"$BACKEND_PATH"; then
   exit 1
 fi
