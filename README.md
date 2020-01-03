@@ -15,6 +15,10 @@ docker run -d \
 -e "RCLONE_CONFIG_MYMEGA_PASS=xxxx" \
 lukasmrtvy/docker-rclone-inotify
 ```
+# obfuscate password
+```
+docker run --rm -it --entrypoint rclone lukasmrtvy/docker-rclone-inotify obscure mypassword
+```
 
 # optional 
 - PUID=1000
