@@ -8,8 +8,8 @@ else
 fi
 
 if [ -n "$BACKEND" ] && [ -n "$BACKEND_PATH" ]; then
-  echo "$BACKEND" > /var/run/s6/container_environment/BACKEND
-  echo "$BACKEND_PATH" > /var/run/s6/container_environment/BACKEND_PATH
+  echo "$BACKEND:$BACKEND_PATH" > /var/run/s6/container_environment/DESTINATION
+  dest="$BACKEND:$BACKEND_PATH"
 else
   echo "BACKEND and BACKEND_PATH must be set."
   exit 1
@@ -33,6 +33,6 @@ chown -R abc /config
 
 s6-setuidgid abc touch "$rc"
 
-if ! s6-setuidgid abc rclone --config "$rc" touch -C "$BACKEND":"$BACKEND_PATH"; then
+if ! s6-setuidgid abc rclone --config "$rc" touch -C "$dest"; then
   exit 1
 fi
