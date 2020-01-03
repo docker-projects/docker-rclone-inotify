@@ -1,14 +1,16 @@
 #!/usr/bin/with-contenv sh
 
 if [ -n "$SOURCE" ] && [ -d "$SOURCE" ]; then
-  echo "$SOURCE" > /var/run/s6/container_environment/SOURCE
+  #echo "$SOURCE" > /var/run/s6/container_environment/SOURCE
+  printf '%s' "$SOURCE" > /var/run/s6/container_environment/SOURCE
 else
   echo "SOURCE is not set or does not exists."
   exit 1
 fi
 
 if [ -n "$BACKEND" ] && [ -n "$BACKEND_PATH" ]; then
-  echo "$BACKEND:$BACKEND_PATH" > /var/run/s6/container_environment/DESTINATION
+  #echo "$BACKEND:$BACKEND_PATH" > /var/run/s6/container_environment/DESTINATION
+  printf '%s' "$BACKEND:$BACKEND_PATH" > /var/run/s6/container_environment/DESTINATION
   dest="$BACKEND:$BACKEND_PATH"
 else
   echo "BACKEND and BACKEND_PATH must be set."
@@ -20,11 +22,13 @@ if [ -n "$RCLONE_CONFIG" ]; then
      echo "RCLONE_CONFIG does not exist"
      exit 1
   else
-     echo "$RCLONE_CONFIG" > /var/run/s6/container_environment/RCLONE_CONFIG
+     #echo "$RCLONE_CONFIG" > /var/run/s6/container_environment/RCLONE_CONFIG
+     printf '%s' "$RCLONE_CONFIG" > /var/run/s6/container_environment/RCLONE_CONFIG
      rc="$RCLONE_CONFG"
   fi
 else
-  echo "/config/rclone.conf" > /var/run/s6/container_environment/RCLONE_CONFIG
+  #echo "/config/rclone.conf" > /var/run/s6/container_environment/RCLONE_CONFIG
+  printf '/config/rclone.conf' > /var/run/s6/container_environment/RCLONE_CONFIG
   rc="/config/rclone.conf"
 fi
 
