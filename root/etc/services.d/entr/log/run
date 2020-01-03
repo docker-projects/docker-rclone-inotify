@@ -1,3 +1,3 @@
 #!/usr/bin/with-contenv sh
 
-while read events; do rclone sync -q "$SOURCE" "$BACKEND":"$BACKEND_PATH" ; done
+while read events; do rclone sync -q "$SOURCE" "$DESTINATION" ; done
