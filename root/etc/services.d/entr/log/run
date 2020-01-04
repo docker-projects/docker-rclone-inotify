@@ -1,3 +1,10 @@
 #!/usr/bin/with-contenv sh
 
-while read events; do rclone rc -q --no-output sync/sync _async=true srcFs="$SOURCE" dstFs="$DESTINATION" "${RC_USER:+--rc-user=$RC_USER}" "${RC_PASS:+--rc-pass=$RC_PASS}" ; done
+set --;
+if [ -n "$RC_USER" ] && [ -n "$RC_PASS" ] ; then 
+  set "$@" -- --rc-user="$RC_USER" --rc-pass="$RC_PASS"; 
+fi; 
+
+while read events; do 
+  s6-setuidgid abc rclone rc -q --no-output sync/sync _async=true srcFs="$SOURCE" dstFs="$DESTINATION" "$@" ; 
+done
