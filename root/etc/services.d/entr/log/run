@@ -6,5 +6,5 @@ if [ -n "$RC_USER" ] && [ -n "$RC_PASS" ] ; then
 fi; 
 
 while read events; do 
-  s6-setuidgid abc rclone rc -q --no-output sync/sync _async=true srcFs="$SOURCE" dstFs="$DESTINATION" "$@" ; 
+  s6-setuidgid abc rclone rc -q --no-output sync/sync _async=false srcFs="$SOURCE" dstFs="$DESTINATION" "$@" ; 
 done
