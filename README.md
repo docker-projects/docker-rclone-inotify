@@ -21,6 +21,18 @@ docker run --rm -it --entrypoint rclone lukasmrtvy/docker-rclone-inotify obscure
 ```
 
 # optional 
-- PUID=1000
-- PGID=1000
-- TZ=Europe/Prague
+- -e PUID=1000
+- -e PGID=1000
+- -e TZ=Europe/Prague
+- -e RC_USER=admin
+- -e RC_PASS=admin
+- -p 5572:5572
+
+# prometheus exporter ( https://github.com/vshn/rclone-exporter )
+```
+docker run -d \
+--name rcloned-prometheus \
+-p 8080:8080 \
+vshn/rclone-exporter:1.0.0 \
+--scrape.url http://admin:admin@rclone-url:5572/
+```
