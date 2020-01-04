@@ -51,3 +51,23 @@ else
   printf 'Initial sync...\n'
   s6-setuidgid abc rclone sync --rc --config "$rc" --rc-addr=0.0.0.0:5572 "$SOURCE" "$dest" "$@"
 fi
+
+
+
+if [ -n "$CRONTAB" ]; then
+  if ! [ "$CRONTAB" ~= $/(@(annually|yearly|monthly|weekly|daily|hourly|reboot))|(@every (\d+(ns|us|µs|ms|s|m|h))+)|((((\d+,)+\d+|(\d+(\/|-)\d+)|\d+|\*) ?){5,7})/ ];
+    printf 'crontab is invalid, fallbacking to 1min pool'
+  else 
+    cron="$CRONTAB"
+  fi
+else
+  cron="* * * * *"
+fi
+
+set --; 
+if [ -n "$RC_USER" ] && [ -n "$RC_PASS" ] ; then 
+  set "$@" -- --rc-user="$RC_USER" --rc-pass="$RC_PASS"; 
+fi 
+
+echo "${cron} rclone rc -q --no-output sync/sync _async=true srcFs="$SOURCE" dstFs="$DESTINATION" "$@"" > /config/cron
+
