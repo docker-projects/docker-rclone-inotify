@@ -39,4 +39,11 @@ s6-setuidgid abc touch "$rc"
 
 if ! s6-setuidgid abc rclone --config "$rc" touch -C "$dest"; then
   exit 1
+else
+  printf 'Initial sync...'
+  set --; 
+  if [ -n "$RC_USER" ] && [ -n "$RC_PASS" ] ; then 
+    set "$@" -- --rc-user="$RC_USER" --rc-pass="$RC_PASS"; 
+  fi 
+  s6-setuidgid abc rclone sync --rc --config "$rc" --rc-addr=0.0.0.0:5572 "$SOURCE" "$dest" "$@"
 fi
