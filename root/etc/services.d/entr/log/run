@@ -1,3 +1,4 @@
 #!/usr/bin/with-contenv sh
 
-while read events; do rclone sync -q "$SOURCE" "$DESTINATION" ; done
+#while read events; do rclone sync -q "$SOURCE" "$DESTINATION" ; done
+while read events; do rclone rc --loopback sync/sync _async=true srcFs="$SOURCE" dstFs="$DESTINATION" ; done
