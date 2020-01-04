@@ -48,5 +48,5 @@ else
   s6-setuidgid abc rclone sync --rc --config "$rc" --rc-addr=0.0.0.0:5572 "$SOURCE" "$dest" "$@"
   printf 'Trying to dedupe...\n'
   dedupe_mode="${DEDUPE_MODE:-rename}"
-  s6-setuidgid abc rclone dedupe --dedupe-mode "$dedupe_mode" --rc --config "$rc" --rc-addr=0.0.0.0:5572 "$dest" "$@"
+  s6-setuidgid abc rclone dedupe --dedupe-mode "$dedupe_mode" -v --rc --config "$rc" --rc-addr=0.0.0.0:5572 "$dest" "$@"
 fi
